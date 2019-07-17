@@ -200,5 +200,5 @@ contain special characters."""
         # try mystb.in again
         async with aiohttp.ClientSession() as session:
             async with session.post("https://hastebin.com/documents", data=stringx.encode('utf-8')) as post:
-                post = await post.txt()      
-        return f"https://hastebin.com/{post['key']}.txt"
+                post = await post.json()      
+        return f"https://hastebin.com/{post['key']}.json"
