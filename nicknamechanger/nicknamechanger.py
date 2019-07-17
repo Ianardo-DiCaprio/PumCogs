@@ -101,15 +101,15 @@ contain special characters."""
             difference = time_after - time_before
             difference = round(difference.total_seconds() / 60.0, 1)
             if changed_users == "":
-                link = await self.mystbin(stringx="No users with special characters in their nicknames could be found.")
+                link = await ctx.send(f"No users with special characters in their nicknames could be found.")
             else:
-                link = await self.mystbin(stringx=f"Found {counter_} members:\n{changed_users}")
+                link = await ctx.send(f"Found {counter_} members:\n{changed_users}")
             embed = discord.Embed(
                 color=discord.Color.green(),
                 timestamp=datetime.utcnow(),
                 title="Successfully finished!",
                 description=f"Found {counter_} members with special characters in their nickname in "
-                            f"{difference} minutes.\nHere is the link to the list: {link}",
+                            f"{difference} minutes.",
             )
             embed.set_author(name=f"{ctx.message.author}", icon_url=f"{ctx.message.author.avatar_url}")
             await ctx.send(embed=embed)
@@ -194,10 +194,3 @@ contain special characters."""
             embed.set_author(name=f"{ctx.message.author}", icon_url=f"{ctx.message.author.avatar_url}")
             await ctx.send(embed=embed)
             print(error)
-
-    @staticmethod
-    async def mystbin(stringx):
-        async with aiohttp.ClientSession() as session:
-            async with session.post("https://hastebin.com/documents") as post:
-                post = await post.json(content_type='custom/type')
-        return f"https://hastebin.com/{post['key']}.txt"
