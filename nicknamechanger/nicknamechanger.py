@@ -201,4 +201,4 @@ contain special characters."""
         async with aiohttp.ClientSession() as session:
             async with session.post("https://hastebin.com/documents") as post:
                 post = await post.json(content_type=None)
-        return f"https://hastebin.com/{post['key']}.json"
+        return f"https://hastebin.com/{post['key']}.txt"
