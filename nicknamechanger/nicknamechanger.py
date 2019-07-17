@@ -63,17 +63,16 @@ contain special characters."""
                             pass
                         counter += 1
             if changed_users == "":
-                link = await self.mystbin(stringx="No users with special characters in their nicknames could be found.")
+                link = await ctx.send("No users with special characters in their nicknames could be found.")
             else:
-                link = await self.mystbin(stringx=f"Found {counter} members:\n{changed_users}")
+                link = await ctx.send(f"Found {counter} members:\n{changed_users}")
             time_after = datetime.utcnow()
             difference = time_after - time_before
             difference = round(difference.total_seconds() / 60.0, 1)
             embed = discord.Embed(
                 color=discord.Color.green(),
                 title="Successfully finished!",
-                description=f"Changed {counter} nicknames in {difference} minutes. Here is a list with all changes: "
-                            f"{link}",
+                description=f"Changed {counter} nicknames in {difference} minutes",
                 timestamp=datetime.utcnow()
             )
             embed.set_author(name=f"{ctx.message.author}", icon_url=f"{ctx.message.author.avatar_url}")
@@ -85,8 +84,6 @@ contain special characters."""
                 else:
                     await ctx.message.author(embed=embed)
         else:
-            # only returns the list
-            await ctx.send("Okay. I will create a file now with all users who have special characters in their name.")
             changed_users = ""
             counter_ = 0
             time_before = datetime.utcnow()
